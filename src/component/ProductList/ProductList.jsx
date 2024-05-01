@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import css from './ProductList.module.css'
 
 
 const ProductList = ({products}) => {
@@ -13,6 +15,7 @@ const ProductList = ({products}) => {
                   <p>description: {product.description}</p>
                   <h4>price: {product.price}</h4>
                   <p>rating: {product.rating}</p>
+                  <Link className={css.limk} to={`/products/${product.id}`}>See the details</Link>
                 </li>
               );
             })}
