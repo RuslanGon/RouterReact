@@ -1,5 +1,5 @@
 
-import "./App.css";
+// import "./App.css";
 import Loader from "../component/Loader/Loader";
 import ErrorMessage from "../component/ErrorMessage/ErrorMessage";
 import ProductList from "../component/ProductList/ProductList";
