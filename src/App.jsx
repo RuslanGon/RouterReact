@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./App.css";
 import MailBox from "./component/MailBox/MailBox";
 import MeestExpressUser from "./component/MailBox/meestExpress.json";
@@ -8,7 +8,7 @@ import MailBoxForm from "./component/MailBoxForm/MailBoxForm";
 function App() {
   const [filter, setFilter] = useState("");
 
-
+  const [counter, setCounter] = useState(0)
 
 
   const [users, setUsers] = useState(() => {
@@ -37,13 +37,19 @@ function App() {
   const onChangeFilter = (event) => {
     setFilter(event.target.value);
   };
-  const filterUsers = users.filter((user) =>
-    user.userName.toLowerCase().includes(filter.toLowerCase()) || 
-    user.userEmail.toLowerCase().includes(filter.toLowerCase())
-  );
+  const filterUsers = useMemo(() => users.filter((user) =>
+  user.userName.toLowerCase().includes(filter.toLowerCase()) || 
+  user.userEmail.toLowerCase().includes(filter.toLowerCase())
+) , [filter, users])
+  
   return (
+    
     <div>
       <MailBoxForm onAddUsers={onAddUsers} />
+      <section>
+        <h2>Counter: {counter}</h2>
+        <button onClick={(() => setCounter(counter+1))} >Click to increment counter</button>
+      </section>
       <section>
         <h2>Search users by name or email</h2>
         <input
