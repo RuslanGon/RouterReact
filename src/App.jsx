@@ -8,7 +8,10 @@ function App() {
     
     <div>
      <header>
+      {/* <a target="blank" rel='noopener noreferrer' href="/products">Products</a> */}
+    <NavLink to='/mailbox'>MailBos</NavLink>
     <NavLink to='/products'>Products</NavLink>
+    <NavLink to='/search'>Search</NavLink>
 
      </header>
     </div>
