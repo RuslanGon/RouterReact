@@ -1,35 +1,65 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import "./App.css";
+import MailBox from "./component/MailBox/MailBox";
+import MeestExpressUser from "./component/MailBox/meestExpress.json";
+import { nanoid } from "nanoid";
+import MailBoxForm from "./component/MailBoxForm/MailBoxForm";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [filter, setFilter] = useState("");
 
+
+
+
+  const [users, setUsers] = useState(() => {
+    const stringyfieUsers = localStorage.getItem("users");
+    if (!stringyfieUsers) return MeestExpressUser;
+    const parseUsers = JSON.parse(stringyfieUsers);
+    return parseUsers;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("users", JSON.stringify(users));
+  }, [users]);
+
+  const onAddUsers = (formData) => {
+    const finalUser = {
+      ...formData,
+      id: nanoid(),
+    };
+    // setUsers([...users, finalUser ])
+    setUsers((pevState) => [...pevState, finalUser]);
+  };
+  const onDeleteUsers = (userId) => {
+    setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
+  };
+
+  const onChangeFilter = (event) => {
+    setFilter(event.target.value);
+  };
+  const filterUsers = users.filter((user) =>
+    user.userName.toLowerCase().includes(filter.toLowerCase()) || 
+    user.userEmail.toLowerCase().includes(filter.toLowerCase())
+  );
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <MailBoxForm onAddUsers={onAddUsers} />
+      <section>
+        <h2>Search users by name or email</h2>
+        <input
+          type="text"
+          placeholder="search..."
+          value={filter}
+          onChange={onChangeFilter}
+        />
+      </section>
+      <MailBox
+        boxTitle="Meest Express"
+        boxUsers={filterUsers}
+        onDeleteUsers={onDeleteUsers}
+      />
+    </div>
+  );
 }
 
-export default App
+export default App;
