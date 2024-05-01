@@ -5,6 +5,7 @@ import clsx from "clsx";
 import MailBoxPage from './pages/MailBoxPage'
 import ProductsPage from './pages/ProductsPage'
 import SearchPage from './pages/SearchPage'
+import HomePage from "./pages/HomePage";
 
 function App() {
 
@@ -17,15 +18,25 @@ const getNavLinkClass = ({isActive}) => clsx(css.navlink, {
       <header>
         <nav className={css.nav}>
           {/* <a target="blank" rel='noopener noreferrer' href="/products">Products</a> */}
-          <NavLink className={getNavLinkClass} to="/mailbox">MailBox</NavLink>
-          <NavLink className={getNavLinkClass} to="/products">Products</NavLink>
-          <NavLink className={getNavLinkClass} to="/search">Search</NavLink>
+          <NavLink className={getNavLinkClass} to="/">
+            Home Page
+          </NavLink>
+          <NavLink className={getNavLinkClass} to="/mailbox">
+            MailBox
+          </NavLink>
+          <NavLink className={getNavLinkClass} to="/products">
+            Products
+          </NavLink>
+          <NavLink className={getNavLinkClass} to="/search">
+            Search
+          </NavLink>
         </nav>
       </header>
       <main>
         <Routes>
+          <Route path="/" element={<HomePage />} />
           <Route path="/mailbox" element={<MailBoxPage />} />
-          <Route path="/products" element={<ProductsPage  />} />
+          <Route path="/products" element={<ProductsPage />} />
           <Route path="/search" element={<SearchPage />} />
         </Routes>
       </main>
