@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Link, Route, Routes, useParams } from "react-router-dom"
 import { reguestProductDetailsById } from "../serveses/api"
 import CommentPage from "./CommentPage"
+import ReviesPage from "./ReviesPage"
 
 
 const ProductDetailsPage = () => {
@@ -33,8 +34,10 @@ const ProductDetailsPage = () => {
         <p>Price: {productDetails.price}</p>
       </div>}
       <Link to='comments'>Comments</Link>
+      <Link to='reviews'>Revies</Link>
       <Routes>
       <Route path="comments" element={<CommentPage />} />
+      <Route path="reviews" element={<ReviesPage />} />
       </Routes>
     </div>
   )
