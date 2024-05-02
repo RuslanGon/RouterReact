@@ -3,6 +3,7 @@ import { NavLink, Route, Routes } from "react-router-dom";
 import css from './App.module.css'
 import clsx from "clsx";
 import { Suspense, lazy } from "react";
+import Loader from "./component/Loader/Loader";
 
 
 // import MailBoxPage from './pages/MailBoxPage'
@@ -46,7 +47,7 @@ const getNavLinkClass = ({isActive}) => clsx(css.navlink, {
         </nav>
       </header>
       <main>
-        <Suspense>
+        <Suspense fallback={<Loader/>}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/mailbox" element={<MailBoxPage />} />
