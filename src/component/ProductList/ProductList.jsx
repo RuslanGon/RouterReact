@@ -1,10 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import css from './ProductList.module.css'
 
 
 const ProductList = ({products}) => {
+
+const location = useLocation()
+
     return (
       <ul>
+        {location.pathname === '/search' && <h2>Search resalt</h2>}
+        {location.pathname === '/products' && <h2>Products result</h2>}
           {Array.isArray(products) &&
             products.map((product) => {
               return (
