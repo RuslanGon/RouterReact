@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react"
-import { Link, Route, Routes, useParams } from "react-router-dom"
+import { useEffect, useRef, useState } from "react"
+import { Link, Route, Routes, useLocation, useParams } from "react-router-dom"
 import { reguestProductDetailsById } from "../serveses/api"
 import CommentPage from "./CommentPage"
 import ReviesPage from "./ReviesPage"
 
 
 const ProductDetailsPage = () => {
+
+  const location = useLocation()
+  const backLinkRef = useRef(location.state ?? '/')
 
   const {productId} = useParams()
 
@@ -26,6 +29,7 @@ const ProductDetailsPage = () => {
   return (
     <div>
       <h1>Product details {productId}</h1>
+      <Link to={backLinkRef.current}>←Go back</Link>
       {productDetails !== null && 
       <div>
         <img src={productDetails.thumbnail} alt={productDetails.title} />
