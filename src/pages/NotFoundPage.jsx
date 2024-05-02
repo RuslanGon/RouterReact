@@ -8,6 +8,7 @@ const NotFoundPage = () => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setTimer(prevTimer => prevTimer + 1)
+      // setTimer(timer + 1)
     }, 1000)
 
     return () => clearInterval(intervalId)
