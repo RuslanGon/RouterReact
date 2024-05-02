@@ -13,7 +13,6 @@ const RefExaple = () => {
     inputRef.current.focus() 
   }, [])
 
-  
 
   return (
     <div>
